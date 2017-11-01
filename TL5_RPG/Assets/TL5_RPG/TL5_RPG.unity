@@ -1634,8 +1634,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAgent: {fileID: 0}
   dialogue:
-  - yo dawg
-  - 'I have a pain in my bell end '
+  - Yo sup man. Hey listen...
+  - '... I have a pain in my nethers.  Sorry.'
   alias: 
 --- !u!23 &395298459
 MeshRenderer:
@@ -2500,7 +2500,7 @@ MonoBehaviour:
   dialogue:
   - Check out that creepy looking cave over there!
   - Why is it creepy you say? Well, heck if I knew!
-  - Now, then scram, you lil piec of shit
+  - Now, then scram, you lil piece of shit.
   alias: 
 --- !u!23 &535101218
 MeshRenderer:
@@ -2792,6 +2792,17 @@ GameObject:
   m_PrefabParentObject: {fileID: 1052935073116378, guid: 24a033bbbdaaa9049ac5627dba1152c2,
     type: 2}
   m_PrefabInternal: {fileID: 1840340273}
+--- !u!114 &583926543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 583926542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23fb4edcbd7ba749bb9f1e7ad3319ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &583926544
 MonoBehaviour:
   m_ObjectHideFlags: 0

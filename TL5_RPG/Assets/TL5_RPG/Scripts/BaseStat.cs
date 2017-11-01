@@ -1,8 +1,37 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class BaseStat : MonoBehaviour
+public class BaseStat
 {
+	public List<StatBonus> BaseAdditives { get; set; }
+
 	public int BaseValue { get; set; }
+	public int FinalValue { get; set; }
+	public string Name { get; set; }
+	public string Description { get; set; }
+
+	public BaseStat(int value, string name, string description)
+	{
+		BaseAdditives = new List<StatBonus>();
+		BaseValue = value;
+		Name = name;
+		Description = description;
+	}
+
+	public void AddBonus(StatBonus bonus)
+	{
+		BaseAdditives.Add(bonus);
+	}
+
+	public void RemoveBonus(StatBonus bonus)
+	{
+		BaseAdditives.Remove(bonus);
+	}
+
+	public int GetCalculatedStatValue()
+	{
+		BaseAdditives.ForEach(x => FinalValue += x.Value);
+		FinalValue += BaseValue;
+		return FinalValue;
+	}
 }
