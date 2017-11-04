@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.IO;
 
 public class PlayerWeaponController : MonoBehaviour
 {
@@ -14,10 +15,11 @@ public class PlayerWeaponController : MonoBehaviour
 			stats.RemoveStatBonuses(EquippedWeapon.GetComponent<IWeapon>().Stats);
 			Destroy(hand.transform.GetChild(0).gameObject);
 		}
-		Debug.Log(hand == null);
-		EquippedWeapon = Instantiate(Resources.Load<GameObject>("Weapons/" + toEquip.Info),
+		EquippedWeapon = Instantiate(
+			Resources.Load<GameObject>(Path.Combine("Weapons", toEquip.Info)),
 			hand.transform.position,
-			hand.transform.rotation);
+			hand.transform.rotation
+		);
 		EquippedWeapon.GetComponent<IWeapon>().Stats = toEquip.Stats;
 		EquippedWeapon.transform.SetParent(hand.transform);
 		stats.AddStatBonuses(toEquip.Stats);
