@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class BaseStat
 {
@@ -25,11 +24,12 @@ public class BaseStat
 
 	public void RemoveBonus(StatBonus bonus)
 	{
-		BaseAdditives.Remove(bonus);
+		BaseAdditives.Remove(BaseAdditives.Find(x => x.Value == bonus.Value));
 	}
 
-	public int GetCalculatedStatValue()
+	public int CalculateStat()
 	{
+		FinalValue = 0;
 		BaseAdditives.ForEach(x => FinalValue += x.Value);
 		FinalValue += BaseValue;
 		return FinalValue;
