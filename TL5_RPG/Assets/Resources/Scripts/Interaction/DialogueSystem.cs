@@ -5,15 +5,14 @@ using UnityEngine.UI;
 public class DialogueSystem : MonoBehaviour
 {
 	public static DialogueSystem Instance { get; private set; }
+	public List<string> Lines { get; private set; }
+	public string NpcName { get; private set; }
 
-	public GameObject panel;
-	Button continueButton;
-	Text text;
-	Text nameText;
-	int index;
-
-	public List<string> lines = new List<string>();
-	public string npcName;
+	[SerializeField] private GameObject panel;
+	private Button continueButton;
+	private Text text;
+	private Text nameText;
+	private int index;
 
 	void Awake()
 	{
@@ -37,25 +36,25 @@ public class DialogueSystem : MonoBehaviour
 	public void AddNewDialogue(string[] lines, string npcName)
 	{
 		index = 0;
-		this.lines = new List<string>(lines);
-		this.npcName = npcName;
-		Debug.Log(this.lines.Count);
+		Lines = new List<string>(lines);
+		NpcName = npcName;
+		Debug.Log(Lines.Count);
 		CreateDialogue();
 	}
 	
 	public void CreateDialogue()
 	{
-		text.text = lines[index];
-		nameText.text = npcName;
+		text.text = Lines[index];
+		nameText.text = NpcName;
 		panel.SetActive(true);
 	}
 
 	public void ContinueDialogue()
 	{
-		if (index < lines.Count - 1)
+		if (index < Lines.Count - 1)
 		{
 			index++;
-			text.text = lines[index];
+			text.text = Lines[index];
 		}
 		else
 		{

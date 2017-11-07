@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4200968423371500}
   m_Layer: 0
-  m_Name: PF_Lamp_Spotlit
+  m_Name: Lamp_Spotlit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

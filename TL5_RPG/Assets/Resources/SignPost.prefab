@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4531007336320654}
   m_Layer: 0
-  m_Name: PF_SignPost
+  m_Name: SignPost
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,3 +227,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAgent: {fileID: 0}
+  dialogue: []
+  alias: 

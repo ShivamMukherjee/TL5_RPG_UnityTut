@@ -3,19 +3,20 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-	public List<BaseStat> stats = new List<BaseStat>();
+	public List<BaseStat> Stats { get; private set; }
 	
 	void Start()
 	{
-		stats.Add(new BaseStat(4, "Power", "Your power level."));
-		stats.Add(new BaseStat(2, "Vitality", "Your current vitality."));
+		Stats = new List<BaseStat>();
+		Stats.Add(new BaseStat(4, "Power", "Your power level."));
+		Stats.Add(new BaseStat(2, "Vitality", "Your current vitality."));
 	}
 
 	public void AddStatBonuses(List<BaseStat> stats)
 	{
 		foreach (var stat in stats)
 		{
-			this.stats.Find(x => x.Name == stat.Name).AddBonus(new StatBonus(stat.BaseValue));
+			Stats.Find(x => x.Name == stat.Name).AddBonus(new StatBonus(stat.BaseValue));
 		}
 	}
 
@@ -23,7 +24,7 @@ public class CharacterStats : MonoBehaviour
 	{
 		foreach (var stat in stats)
 		{
-			this.stats.Find(x => x.Name == stat.Name).RemoveBonus(new StatBonus(stat.BaseValue));
+			Stats.Find(x => x.Name == stat.Name).RemoveBonus(new StatBonus(stat.BaseValue));
 		}
 	}
 }

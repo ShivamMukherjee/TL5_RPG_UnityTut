@@ -2,7 +2,7 @@
 
 public class StatBonus
 {
-	public int Value { get; set; }
+	public int Value { get; private set; }
 
 	public StatBonus(int value)
 	{

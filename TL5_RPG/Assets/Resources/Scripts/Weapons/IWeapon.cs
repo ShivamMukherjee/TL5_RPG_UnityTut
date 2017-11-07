@@ -4,4 +4,5 @@ public interface IWeapon
 {
 	List<BaseStat> Stats { get; set; }
 	void Attack();
+	void SpecialAttack();
 }

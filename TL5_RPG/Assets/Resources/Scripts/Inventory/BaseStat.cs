@@ -2,12 +2,11 @@
 
 public class BaseStat
 {
-	public List<StatBonus> BaseAdditives { get; set; }
-
-	public int BaseValue { get; set; }
-	public int FinalValue { get; set; }
-	public string Name { get; set; }
-	public string Description { get; set; }
+	public List<StatBonus> BaseAdditives { get; private set; }
+	public int BaseValue { get; private set; }
+	public int FinalValue { get; private set; }
+	public string Name { get; private set; }
+	public string Description { get; private set; }
 
 	public BaseStat(int value, string name, string description)
 	{

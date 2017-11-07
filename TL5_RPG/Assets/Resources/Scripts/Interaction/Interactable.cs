@@ -1,18 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Interactable : MonoBehaviour
 {
-	[HideInInspector]
-	public NavMeshAgent playerAgent;
-	public string[] dialogue;
-	public string alias;
-
+	private NavMeshAgent playerAgent;
+	[SerializeField] protected string[] dialogue;
+	[SerializeField] protected string alias;
 	private bool hasInteracted;
+	private bool isEnemy;
 
-	public void Start()
+	void Start()
 	{
-		if (alias.Equals(""))
+		if (alias == "")
 		{
 			alias = name;
 		}
@@ -20,6 +20,7 @@ public class Interactable : MonoBehaviour
 
 	public virtual void MoveToInteraction(NavMeshAgent playerAgent)
 	{
+		isEnemy = (this.gameObject.tag == "Enemy");
 		hasInteracted = false;
 		this.playerAgent = playerAgent;
 		// FIXME: potential architectural fault
@@ -27,16 +28,29 @@ public class Interactable : MonoBehaviour
 		playerAgent.destination = this.transform.position;
 	}
 
-	private void Update()
+	void Update()
 	{
 		if (!hasInteracted && playerAgent && !playerAgent.pathPending)
 		{
 			if (playerAgent.remainingDistance <= playerAgent.stoppingDistance)
 			{
-				Interact();
+				if (!isEnemy)
+				{
+					Interact();
+				}
+				EnsureLookDirection();
 				hasInteracted = true;
 			}
 		}
+	}
+
+	private void EnsureLookDirection()
+	{
+		playerAgent.updateRotation = false;
+		Vector3 lookDirection = this.transform.position;
+		lookDirection.y = playerAgent.transform.position.y;
+		playerAgent.transform.LookAt(lookDirection);
+		playerAgent.updateRotation = true;
 	}
 
 	public virtual void Interact()

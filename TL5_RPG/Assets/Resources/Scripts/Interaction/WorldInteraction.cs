@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class WorldInteraction : MonoBehaviour
 {
-	NavMeshAgent playerAgent;
+	private NavMeshAgent playerAgent;
 
 	void Start()
 	{
@@ -16,11 +16,16 @@ public class WorldInteraction : MonoBehaviour
         RaycastHit interactionInfo;
         if (Physics.Raycast(interactionRay, out interactionInfo, Mathf.Infinity))
         {
-            GameObject interactable = interactionInfo.collider.gameObject;
+            GameObject clickedObject = interactionInfo.collider.gameObject;
 
-			if (interactable.tag == "Interactable")
+			if (clickedObject.tag == "Enemy")
 			{
-				interactable.GetComponent<Interactable>().MoveToInteraction(playerAgent);
+				Debug.Log("Approaching enemy.");
+				clickedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
+			}
+			else if (clickedObject.tag == "Interactable")
+			{
+				clickedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
 			}
 			else
 			{
