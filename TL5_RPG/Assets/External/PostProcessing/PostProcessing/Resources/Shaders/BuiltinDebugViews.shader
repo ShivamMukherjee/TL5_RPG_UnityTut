@@ -25,7 +25,7 @@ Shader "Hidden/Post FX/Builtin Debug Views"
 
         float _DepthScale;
 
-        float4 FragDepth(VaryingsDefault i) : SV_Target
+        float4 FragDepth(VaryingsDefault i): SV_Target
         {
             float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, UnityStereoScreenSpaceUVAdjust(i.uv, _CameraDepthTexture_ST));
             depth = Linear01Depth(depth) * _DepthScale;
@@ -52,7 +52,7 @@ Shader "Hidden/Post FX/Builtin Debug Views"
         #endif
         }
 
-        float4 FragNormals(VaryingsDefault i) : SV_Target
+        float4 FragNormals(VaryingsDefault i): SV_Target
         {
             float3 n = SampleNormal(UnityStereoScreenSpaceUVAdjust(i.uv, _CameraDepthNormalsTexture_ST));
 
@@ -70,7 +70,7 @@ Shader "Hidden/Post FX/Builtin Debug Views"
         float _Amplitude;
         float4 _Scale;
 
-        float4 FragMovecsOpacity(VaryingsDefault i) : SV_Target
+        float4 FragMovecsOpacity(VaryingsDefault i): SV_Target
         {
             float4 src = tex2D(_MainTex, i.uv);
             return float4(src.rgb * _Opacity, src.a);
@@ -90,7 +90,7 @@ Shader "Hidden/Post FX/Builtin Debug Views"
             return saturate(float4(r, g, b, a));
         }
 
-        float4 FragMovecsImaging(VaryingsDefault i) : SV_Target
+        float4 FragMovecsImaging(VaryingsDefault i): SV_Target
         {
             float4 src = tex2D(_MainTex, i.uv);
 
@@ -119,9 +119,9 @@ Shader "Hidden/Post FX/Builtin Debug Views"
 
         struct VaryingsArrows
         {
-            float4 vertex : SV_POSITION;
-            float2 scoord : TEXCOORD;
-            float4 color : COLOR;
+            float4 vertex: SV_POSITION;
+            float2 scoord: TEXCOORD;
+            float4 color: COLOR;
         };
 
         VaryingsArrows VertArrows(AttributesDefault v)
@@ -181,7 +181,7 @@ Shader "Hidden/Post FX/Builtin Debug Views"
             return o;
         }
 
-        float4 FragMovecsArrows(VaryingsArrows i) : SV_Target
+        float4 FragMovecsArrows(VaryingsArrows i): SV_Target
         {
             // Pseudo anti-aliasing.
             float aa = length(frac(i.scoord) - 0.5) / 0.707;

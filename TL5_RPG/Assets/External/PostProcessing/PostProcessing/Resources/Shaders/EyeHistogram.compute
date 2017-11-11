@@ -15,7 +15,7 @@ groupshared uint gs_histogram[HISTOGRAM_BINS];
 
 #pragma kernel KEyeHistogram
 [numthreads(HISTOGRAM_THREAD_X,HISTOGRAM_THREAD_Y,1)]
-void KEyeHistogram(uint2 dispatchThreadId : SV_DispatchThreadID, uint2 groupThreadId : SV_GroupThreadID)
+void KEyeHistogram(uint2 dispatchThreadId: SV_DispatchThreadID, uint2 groupThreadId: SV_GroupThreadID)
 {
     // Pretty straightforward implementation of histogram gathering using atomic ops.
     // I tried a few methods (no atomic ops / heavy LDS leveraging) but this one turned out to be

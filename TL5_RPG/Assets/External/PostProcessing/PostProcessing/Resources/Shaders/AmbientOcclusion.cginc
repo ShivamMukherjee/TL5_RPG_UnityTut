@@ -150,10 +150,10 @@ half CompareNormal(half3 d1, half3 d2)
 // Common vertex shader
 struct VaryingsMultitex
 {
-    float4 pos : SV_POSITION;
-    half2 uv : TEXCOORD0;    // Original UV
-    half2 uv01 : TEXCOORD1;  // Alternative UV (supports v-flip case)
-    half2 uvSPR : TEXCOORD2; // Single pass stereo rendering UV
+    float4 pos: SV_POSITION;
+    half2 uv: TEXCOORD0;    // Original UV
+    half2 uv01: TEXCOORD1;  // Alternative UV (supports v-flip case)
+    half2 uvSPR: TEXCOORD2; // Single pass stereo rendering UV
 };
 
 VaryingsMultitex VertMultitex(AttributesDefault v)
@@ -248,7 +248,7 @@ float ComputeDistance(float depth)
 //
 // Distance-based AO estimator based on Morgan 2011 http://goo.gl/2iz3P
 //
-half4 FragAO(VaryingsMultitex i) : SV_Target
+half4 FragAO(VaryingsMultitex i): SV_Target
 {
     float2 uv = i.uv;
 
@@ -318,7 +318,7 @@ half4 FragAO(VaryingsMultitex i) : SV_Target
 }
 
 // Geometry-aware separable bilateral filter
-half4 FragBlur(VaryingsMultitex i) : SV_Target
+half4 FragBlur(VaryingsMultitex i): SV_Target
 {
 #if defined(BLUR_HORIZONTAL)
     // Horizontal pass: Always use 2 texels interval to match to
@@ -438,7 +438,7 @@ half BlurSmall(sampler2D tex, float2 uv, float2 delta)
 }
 
 // Final composition shader
-half4 FragComposition(VaryingsMultitex i) : SV_Target
+half4 FragComposition(VaryingsMultitex i): SV_Target
 {
     float2 delta = _MainTex_TexelSize.xy / _Downsample;
     half ao = BlurSmall(_OcclusionTexture, i.uvSPR, delta);
@@ -471,8 +471,8 @@ VaryingsDefault VertCompositionGBuffer(AttributesDefault v)
 
 struct CompositionOutput
 {
-    half4 gbuffer0 : SV_Target0;
-    half4 gbuffer3 : SV_Target1;
+    half4 gbuffer0: SV_Target0;
+    half4 gbuffer3: SV_Target1;
 };
 
 CompositionOutput FragCompositionGBuffer(VaryingsDefault i)
@@ -490,7 +490,7 @@ CompositionOutput FragCompositionGBuffer(VaryingsDefault i)
 
 #else
 
-fixed4 FragCompositionGBuffer(VaryingsDefault i) : SV_Target0
+fixed4 FragCompositionGBuffer(VaryingsDefault i): SV_Target0
 {
     return 0.0;
 }

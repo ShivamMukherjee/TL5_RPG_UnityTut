@@ -89,7 +89,7 @@ Shader "Hidden/Post FX/Lut Generator"
             return color;
         }
 
-        half4 FragCreateLut(VaryingsDefault i) : SV_Target
+        half4 FragCreateLut(VaryingsDefault i): SV_Target
         {
             // 2D strip lut
             half2 uv = i.uv - _LutParams.yz;

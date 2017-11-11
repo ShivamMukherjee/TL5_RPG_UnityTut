@@ -646,7 +646,7 @@ API PORTING
 // Requires,
 //  #version 120
 // And at least,
-//  #extension GL_EXT_gpu_shader4 : enable
+//  #extension GL_EXT_gpu_shader4: enable
 //  (or set FXAA_FAST_PIXEL_OFFSET 1 to work like DX9)
 #define FxaaTexTop(t, p) texture2DLod(t, p, 0.0)
 #if (FXAA_FAST_PIXEL_OFFSET == 1)
@@ -655,7 +655,7 @@ API PORTING
 #define FxaaTexOff(t, p, o, r) texture2DLod(t, p + (o * r), 0.0)
 #endif
 #if (FXAA_GATHER4_ALPHA == 1)
-// use #extension GL_ARB_gpu_shader5 : enable
+// use #extension GL_ARB_gpu_shader5: enable
 #define FxaaTexAlpha4(t, p) textureGather(t, p, 3)
 #define FxaaTexOffAlpha4(t, p, o) textureGatherOffset(t, p, o, 3)
 #define FxaaTexGreen4(t, p) textureGather(t, p, 1)
@@ -668,7 +668,7 @@ API PORTING
 #define FxaaTexTop(t, p) textureLod(t, p, 0.0)
 #define FxaaTexOff(t, p, o, r) textureLodOffset(t, p, 0.0, o)
 #if (FXAA_GATHER4_ALPHA == 1)
-// use #extension GL_ARB_gpu_shader5 : enable
+// use #extension GL_ARB_gpu_shader5: enable
 #define FxaaTexAlpha4(t, p) textureGather(t, p, 3)
 #define FxaaTexOffAlpha4(t, p, o) textureGatherOffset(t, p, o, 3)
 #define FxaaTexGreen4(t, p) textureGather(t, p, 1)
@@ -995,8 +995,8 @@ FxaaFloat4 FxaaPixelShader(
     posB.x = posM.x;
     posB.y = posM.y;
     FxaaFloat2 offNP;
-    offNP.x = (!horzSpan) ? 0.0 : fxaaQualityRcpFrame.x;
-    offNP.y = (horzSpan) ? 0.0 : fxaaQualityRcpFrame.y;
+    offNP.x = (!horzSpan) ? 0.0: fxaaQualityRcpFrame.x;
+    offNP.y = (horzSpan) ? 0.0: fxaaQualityRcpFrame.y;
     if (!horzSpan) posB.x += lengthSign * 0.5;
     if (horzSpan) posB.y += lengthSign * 0.5;
     /*--------------------------------------------------------------------------*/
@@ -1235,12 +1235,12 @@ FxaaFloat4 FxaaPixelShader(
     /*--------------------------------------------------------------------------*/
     FxaaBool directionN = dstN < dstP;
     FxaaFloat dst = min(dstN, dstP);
-    FxaaBool goodSpan = directionN ? goodSpanN : goodSpanP;
+    FxaaBool goodSpan = directionN ? goodSpanN: goodSpanP;
     FxaaFloat subpixG = subpixF * subpixF;
     FxaaFloat pixelOffset = (dst * (-spanLengthRcp)) + 0.5;
     FxaaFloat subpixH = subpixG * fxaaQualitySubpix;
     /*--------------------------------------------------------------------------*/
-    FxaaFloat pixelOffsetGood = goodSpan ? pixelOffset : 0.0;
+    FxaaFloat pixelOffsetGood = goodSpan ? pixelOffset: 0.0;
     FxaaFloat pixelOffsetSubpix = max(pixelOffsetGood, subpixH);
     if (!horzSpan) posM.x += pixelOffsetSubpix * lengthSign;
     if (horzSpan) posM.y += pixelOffsetSubpix * lengthSign;
@@ -1443,8 +1443,8 @@ float4 FxaaPixelShader(
     float4 rgbyA = rgbyN1 + rgbyP1;
     float4 rgbyB = rgbyN2 + rgbyP2 + rgbyA * 0.5;
     /*--------------------------------------------------------------------------*/
-    float4 rgbyR = ((FxaaLuma(rgbyB) - lumaMax) > 0.0) ? rgbyA : rgbyB;
-    rgbyR = ((FxaaLuma(rgbyB) - lumaMin) > 0.0) ? rgbyR : rgbyA;
+    float4 rgbyR = ((FxaaLuma(rgbyB) - lumaMax) > 0.0) ? rgbyA: rgbyB;
+    rgbyR = ((FxaaLuma(rgbyB) - lumaMin) > 0.0) ? rgbyR: rgbyA;
     return rgbyR;
 }
 /*==========================================================================*/

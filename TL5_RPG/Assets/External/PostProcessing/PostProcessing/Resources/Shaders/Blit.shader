@@ -12,8 +12,8 @@ Shader "Hidden/Post FX/Blit"
 
         struct Varyings
         {
-            float2 uv : TEXCOORD0;
-            float4 vertex : SV_POSITION;
+            float2 uv: TEXCOORD0;
+            float4 vertex: SV_POSITION;
         };
 
         Varyings VertBlit(AttributesDefault v)
@@ -24,7 +24,7 @@ Shader "Hidden/Post FX/Blit"
             return o;
         }
 
-        half4 FragBlit(Varyings i) : SV_Target
+        half4 FragBlit(Varyings i): SV_Target
         {
             half4 col = tex2D(_MainTex, i.uv);
             return col;

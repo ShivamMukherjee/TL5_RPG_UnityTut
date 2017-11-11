@@ -38,7 +38,7 @@ Shader "Hidden/Post FX/FXAA"
         float3 _QualitySettings;
         float4 _ConsoleSettings;
 
-        half4 Frag(VaryingsDefault i) : SV_Target
+        half4 Frag(VaryingsDefault i): SV_Target
         {
             const float4 consoleUV = i.uv.xyxy + 0.5 * float4(-_MainTex_TexelSize.xy, _MainTex_TexelSize.xy);
             const float4 consoleSubpixelFrame = _ConsoleSettings.x * float4(-1.0, -1.0, 1.0, 1.0) *

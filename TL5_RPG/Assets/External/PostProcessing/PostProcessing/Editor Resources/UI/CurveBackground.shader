@@ -14,7 +14,7 @@ Shader "Hidden/Post FX/UI/Curve Background"
             return c.z * lerp(K.xxx, saturate(p - K.xxx), c.y);
         }
 
-        float4 FragHue(v2f_img i) : SV_Target
+        float4 FragHue(v2f_img i): SV_Target
         {
             float3 hsv = HsvToRgb(float3(i.uv.x, 1.0, 0.2));
             float4 color = float4((0.0).xxx, 1.0);
@@ -23,7 +23,7 @@ Shader "Hidden/Post FX/UI/Curve Background"
             return float4(color.rgb, color.a * _DisabledState);
         }
 
-        float4 FragSat(v2f_img i) : SV_Target
+        float4 FragSat(v2f_img i): SV_Target
         {
             float4 color = float4((0.0).xxx, 1.0);
             float sat = i.uv.x / 2;

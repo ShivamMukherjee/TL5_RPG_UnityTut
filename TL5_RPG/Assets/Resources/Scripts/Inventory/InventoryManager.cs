@@ -1,36 +1,54 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
-	[SerializeField] private PlayerWeaponController weaponController;
+	static public InventoryManager Instance { get; private set; }
+	public List<ItemMeta> Items { get; private set; }
+	[SerializeField] private WeaponController weaponController;
 	[SerializeField] private ConsumableController consumableController;
-	public ItemMeta Weapon { get; private set; }
-	public ItemMeta Consumable { get; private set; }
+	private InventoryUIInfo itemDetails;
 
 	// Use this for initialization
 	void Start()
 	{
-		List<BaseStat> stats = new List<BaseStat>();
-		weaponController = GetComponent<PlayerWeaponController>();
+		if (Instance && Instance != this)
+		{
+			Destroy(gameObject);
+		}
+		else
+		{
+			Instance = this;
+		}
+
+		Items = new List<ItemMeta>();
+		weaponController = GetComponent<WeaponController>();
 		consumableController = GetComponent<ConsumableController>();
-		stats.Add(new BaseStat(6, "Power", "Your power level."));
-		Weapon = new ItemMeta(stats, "SpitwadLauncher");
-		Consumable = new ItemMeta(new List<BaseStat>(),
-			"PotionDebug", "Logs out debug info. No in-game use really.", "Drinkity", "Debug Potion", false);
+		PlaceItem("SpitwadLauncher");
+		PlaceItem("PotionDebug");
+		PlaceItem("ShitStick");
 	}
 
-	// Update is called once per frame
-	void Update()
+	public void PlaceItem(string info)
 	{
-		if (Input.GetKeyDown(KeyCode.Tab))
-		{
-			weaponController.Equip(Weapon);
-		}
+		ItemMeta item = new ItemMeta(ItemDatabase.Instance.GetItem(info));
+		Items.Add(item);
+		UIEventHandler.ItemAddedToInventory(Items.Last());
+	}
 
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			consumableController.Consume(Consumable);
-		}
+	public void SetupItemDetails(ItemMeta item, UnityEngine.UI.Button selectedElement)
+	{
+		itemDetails.SetItem(item, selectedElement);
+	}
+
+	public void PerformEquipActon(ItemMeta weapon)
+	{
+		weaponController.Equip(weapon);
+	}
+
+	public void PerformConsumeAction(ItemMeta consumable)
+	{
+		consumableController.Consume(consumable);
 	}
 }

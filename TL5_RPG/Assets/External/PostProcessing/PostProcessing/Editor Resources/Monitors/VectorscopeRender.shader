@@ -35,7 +35,7 @@ Shader "Hidden/Post FX/Monitors/Vectorscope Render"
                 return float3(R, G, B);
             }
 
-            float4 FragBackground(v2f_img i) : SV_Target
+            float4 FragBackground(v2f_img i): SV_Target
             {
                 i.uv.x = 1.0 - i.uv.x;
                 float2 uv = i.uv - (0.5).xx;
@@ -55,7 +55,7 @@ Shader "Hidden/Post FX/Monitors/Vectorscope Render"
                 return color;
             }
 
-            float4 FragNoBackground(v2f_img i) : SV_Target
+            float4 FragNoBackground(v2f_img i): SV_Target
             {
                 i.uv.x = 1.0 - i.uv.x;
                 float2 uv = i.uv - (0.5).xx;

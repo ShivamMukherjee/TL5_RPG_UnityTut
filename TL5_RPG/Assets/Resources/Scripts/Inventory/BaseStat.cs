@@ -1,36 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class BaseStat
 {
-	public List<StatBonus> BaseAdditives { get; private set; }
-	public int BaseValue { get; private set; }
-	public int FinalValue { get; private set; }
-	public string Name { get; private set; }
-	public string Description { get; private set; }
+	public string name;
+	public int baseValue;
+	public string description;
+	public List<StatBonus> baseAdditives;
 
-	public BaseStat(int value, string name, string description)
+	[Newtonsoft.Json.JsonConstructor]
+	public BaseStat(int value, string name, string description = "")
 	{
-		BaseAdditives = new List<StatBonus>();
-		BaseValue = value;
-		Name = name;
-		Description = description;
+		baseAdditives = new List<StatBonus>();
+		baseValue = value;
+		this.name = name;
+		this.description = description;
 	}
 
 	public void AddBonus(StatBonus bonus)
 	{
-		BaseAdditives.Add(bonus);
+		baseAdditives.Add(bonus);
 	}
 
 	public void RemoveBonus(StatBonus bonus)
 	{
-		BaseAdditives.Remove(BaseAdditives.Find(x => x.Value == bonus.Value));
+		baseAdditives.Remove(baseAdditives.Find(x => x.Value == bonus.Value));
 	}
 
-	public int CalculateStat()
+	public int FinalValue()
 	{
-		FinalValue = 0;
-		BaseAdditives.ForEach(x => FinalValue += x.Value);
-		FinalValue += BaseValue;
-		return FinalValue;
+		int finalValue = 0;
+		baseAdditives.ForEach(x => finalValue += x.Value);
+		finalValue += baseValue;
+		return finalValue;
 	}
 }

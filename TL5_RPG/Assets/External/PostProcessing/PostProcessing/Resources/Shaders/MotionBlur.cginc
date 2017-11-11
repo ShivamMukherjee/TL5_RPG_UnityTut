@@ -51,9 +51,9 @@ half _History4Weight;
 
 struct VaryingsMultitex
 {
-    float4 pos : SV_POSITION;
-    float2 uv0 : TEXCOORD0;
-    float2 uv1 : TEXCOORD1;
+    float4 pos: SV_POSITION;
+    float2 uv0: TEXCOORD0;
+    float2 uv1: TEXCOORD1;
 };
 
 VaryingsMultitex VertMultitex(AttributesDefault v)
@@ -75,7 +75,7 @@ VaryingsMultitex VertMultitex(AttributesDefault v)
 // Prefilter
 
 // Velocity texture setup
-half4 FragVelocitySetup(VaryingsDefault i) : SV_Target
+half4 FragVelocitySetup(VaryingsDefault i): SV_Target
 {
     // Sample the motion vector.
     float2 v = tex2D(_CameraMotionVectorsTexture, i.uv).rg;
@@ -94,7 +94,7 @@ half4 FragVelocitySetup(VaryingsDefault i) : SV_Target
 }
 
 // TileMax filter (2 pixel width with normalization)
-half4 FragTileMax1(VaryingsDefault i) : SV_Target
+half4 FragTileMax1(VaryingsDefault i): SV_Target
 {
     float4 d = _MainTex_TexelSize.xyxy * float4(-0.5, -0.5, 0.5, 0.5);
 
@@ -112,7 +112,7 @@ half4 FragTileMax1(VaryingsDefault i) : SV_Target
 }
 
 // TileMax filter (2 pixel width)
-half4 FragTileMax2(VaryingsDefault i) : SV_Target
+half4 FragTileMax2(VaryingsDefault i): SV_Target
 {
     float4 d = _MainTex_TexelSize.xyxy * float4(-0.5, -0.5, 0.5, 0.5);
 
@@ -125,7 +125,7 @@ half4 FragTileMax2(VaryingsDefault i) : SV_Target
 }
 
 // TileMax filter (variable width)
-half4 FragTileMaxV(VaryingsDefault i) : SV_Target
+half4 FragTileMaxV(VaryingsDefault i): SV_Target
 {
     float2 uv0 = i.uv + _MainTex_TexelSize.xy * _TileMaxOffs.xy;
 
@@ -149,7 +149,7 @@ half4 FragTileMaxV(VaryingsDefault i) : SV_Target
 }
 
 // NeighborMax filter
-half4 FragNeighborMax(VaryingsDefault i) : SV_Target
+half4 FragNeighborMax(VaryingsDefault i): SV_Target
 {
     const half cw = 1.01; // Center weight tweak
 
@@ -199,7 +199,7 @@ half3 SampleVelocity(float2 uv)
 }
 
 // Reconstruction filter
-half4 FragReconstruction(VaryingsMultitex i) : SV_Target
+half4 FragReconstruction(VaryingsMultitex i): SV_Target
 {
     // Color sample at the center point
     const half4 c_p = tex2D(_MainTex, i.uv0);
@@ -219,7 +219,7 @@ half4 FragReconstruction(VaryingsMultitex i) : SV_Target
 
     // Use V_p as a secondary sampling direction except when it's too small
     // compared to V_max. This vector is rescaled to be the length of V_max.
-    const half2 v_alt = (l_v_p * 2.0 > l_v_max) ? vd_p.xy * (l_v_max / l_v_p) : v_max;
+    const half2 v_alt = (l_v_p * 2.0 > l_v_max) ? vd_p.xy * (l_v_max / l_v_p): v_max;
 
     // Determine the sample count.
     const half sc = floor(min(_LoopCount, l_v_max * 0.5));
@@ -240,10 +240,10 @@ half4 FragReconstruction(VaryingsMultitex i) : SV_Target
     UNITY_LOOP while (t > dt * 0.25)
     {
         // Sampling direction (switched per every two samples)
-        const half2 v_s = Interval(count, 4.0) ? v_alt : v_max;
+        const half2 v_s = Interval(count, 4.0) ? v_alt: v_max;
 
         // Sample position (inverted per every sample)
-        const half t_s = (Interval(count, 2.0) ? -t : t) + t_offs;
+        const half t_s = (Interval(count, 2.0) ? -t: t) + t_offs;
 
         // Distance to the sample position
         const half l_t = l_v_max * abs(t_s);
@@ -275,7 +275,7 @@ half4 FragReconstruction(VaryingsMultitex i) : SV_Target
         l_v_bg = max(l_v_bg, l_v);
 
         // Advance to the next sample.
-        t = Interval(count, 2.0) ? t - dt : t;
+        t = Interval(count, 2.0) ? t - dt: t;
         count += 1.0;
     }
 
@@ -306,8 +306,8 @@ VaryingsDefault VertFrameCompress(AttributesDefault v)
 // MRT output struct for the compressor
 struct CompressorOutput
 {
-    half4 luma   : SV_Target0;
-    half4 chroma : SV_Target1;
+    half4 luma  : SV_Target0;
+    half4 chroma: SV_Target1;
 };
 
 // Frame compression fragment shader
@@ -348,7 +348,7 @@ CompressorOutput FragFrameCompress(VaryingsDefault i)
 #else
 
 // MRT might not be supported. Replace it with a null shader.
-half4 FragFrameCompress(VaryingsDefault i) : SV_Target
+half4 FragFrameCompress(VaryingsDefault i): SV_Target
 {
     return 0;
 }
@@ -365,7 +365,7 @@ half3 DecodeHistory(float2 uvLuma, float2 uvCb, float2 uvCr, sampler2D lumaTex, 
 }
 
 // Frame blending fragment shader
-half4 FragFrameBlending(VaryingsMultitex i) : SV_Target
+half4 FragFrameBlending(VaryingsMultitex i): SV_Target
 {
     float sw = _MainTex_TexelSize.z; // Texture width
     float pw = _MainTex_TexelSize.x; // Texel width
@@ -405,7 +405,7 @@ half4 FragFrameBlending(VaryingsMultitex i) : SV_Target
 }
 
 // Frame blending fragment shader (without chroma subsampling)
-half4 FragFrameBlendingRaw(VaryingsMultitex i) : SV_Target
+half4 FragFrameBlendingRaw(VaryingsMultitex i): SV_Target
 {
     half4 src = tex2D(_MainTex, i.uv0);
     half3 acc = src.rgb;

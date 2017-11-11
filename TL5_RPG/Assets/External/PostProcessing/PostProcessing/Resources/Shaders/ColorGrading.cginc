@@ -115,7 +115,7 @@ half AcesLuminance(half3 c)
 half3 OffsetPowerSlope(half3 c, half3 offset, half3 power, half3 slope)
 {
     half3 so = c * slope + offset;
-    so = so > (0.0).xxx ? pow(so, power) : so;
+    so = so > (0.0).xxx ? pow(so, power): so;
     return so;
 }
 
@@ -183,9 +183,9 @@ half RotateHue(half value, half low, half hi)
 {
     return (value < low)
             ? value + hi
-            : (value > hi)
+           : (value > hi)
                 ? value - hi
-                : value;
+               : value;
 }
 
 //

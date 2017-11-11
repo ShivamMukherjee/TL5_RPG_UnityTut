@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 
-public class PlayerWeaponController : MonoBehaviour
+public class WeaponController : MonoBehaviour
 {
 	[SerializeField] private GameObject hand;
 	public GameObject EquippedWeapon { get; private set; }
@@ -22,14 +22,14 @@ public class PlayerWeaponController : MonoBehaviour
 			Destroy(hand.transform.GetChild(0).gameObject);
 		}
 		EquippedWeapon = Instantiate(
-			Resources.Load<GameObject>(Path.Combine("Weapons", toEquip.Info)),
+			Resources.Load<GameObject>(Path.Combine("Weapons", toEquip.info)),
 			hand.transform.position,
 			hand.transform.rotation
 		);
-		EquippedWeapon.GetComponent<IWeapon>().Stats = toEquip.Stats;
+		EquippedWeapon.GetComponent<IWeapon>().Stats = toEquip.stats;
 		EquippedWeapon.GetComponent<IProjectileLauncher>()?.SetProjectileSpawnPoint(projectileSpawnPoint);
 		EquippedWeapon.transform.SetParent(hand.transform);
-		stats.AddStatBonuses(toEquip.Stats);
+		stats.AddStatBonuses(toEquip.stats);
 		Debug.Log(EquippedWeapon);
 	}
 

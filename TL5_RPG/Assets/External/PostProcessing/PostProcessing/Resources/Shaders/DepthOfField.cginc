@@ -28,9 +28,9 @@ half3 _TaaParams; // Jitter.x, Jitter.y, Blending
 
 struct VaryingsDOF
 {
-    float4 pos : SV_POSITION;
-    half2 uv : TEXCOORD0;
-    half2 uvAlt : TEXCOORD1;
+    float4 pos: SV_POSITION;
+    half2 uv: TEXCOORD0;
+    half2 uvAlt: TEXCOORD1;
 };
 
 // Common vertex shader with single pass stereo rendering support
@@ -56,7 +56,7 @@ VaryingsDOF VertDOF(AttributesDefault v)
 }
 
 // CoC calculation
-half4 FragCoC(VaryingsDOF i) : SV_Target
+half4 FragCoC(VaryingsDOF i): SV_Target
 {
     float depth = LinearEyeDepth(DOF_TEX2D(_CameraDepthTexture, i.uv));
     half coc = (depth - _Distance) * _LensCoeff / max(depth, 1e-5);
@@ -64,7 +64,7 @@ half4 FragCoC(VaryingsDOF i) : SV_Target
 }
 
 // Temporal filter
-half4 FragTempFilter(VaryingsDOF i) : SV_Target
+half4 FragTempFilter(VaryingsDOF i): SV_Target
 {
     float3 uvOffs = _MainTex_TexelSize.xyy * float3(1, 1, 0);
 
@@ -91,10 +91,10 @@ half4 FragTempFilter(VaryingsDOF i) : SV_Target
 
     // CoC dilation: determine the closest point in the four neighbors.
     float3 closest = float3(0, 0, coc0);
-    closest = coc1 < closest.z ? float3(-uvOffs.xz, coc1) : closest;
-    closest = coc2 < closest.z ? float3(-uvOffs.zy, coc2) : closest;
-    closest = coc3 < closest.z ? float3(+uvOffs.zy, coc3) : closest;
-    closest = coc4 < closest.z ? float3(+uvOffs.xz, coc4) : closest;
+    closest = coc1 < closest.z ? float3(-uvOffs.xz, coc1): closest;
+    closest = coc2 < closest.z ? float3(-uvOffs.zy, coc2): closest;
+    closest = coc3 < closest.z ? float3(+uvOffs.zy, coc3): closest;
+    closest = coc4 < closest.z ? float3(+uvOffs.xz, coc4): closest;
 
     // Sample the history buffer with the motion vector at the closest point.
     float2 motion = DOF_TEX2D(_CameraMotionVectorsTexture, i.uv + closest.xy).xy;
@@ -110,7 +110,7 @@ half4 FragTempFilter(VaryingsDOF i) : SV_Target
 }
 
 // Prefilter: downsampling and premultiplying.
-half4 FragPrefilter(VaryingsDOF i) : SV_Target
+half4 FragPrefilter(VaryingsDOF i): SV_Target
 {
 #if defined(SEPARATE_TEXTURE_SAMPLER)
 
@@ -162,7 +162,7 @@ half4 FragPrefilter(VaryingsDOF i) : SV_Target
     // Select the largest CoC value.
     half coc_min = Min4(coc0, coc1, coc2, coc3);
     half coc_max = Max4(coc0, coc1, coc2, coc3);
-    half coc = (-coc_min > coc_max ? coc_min : coc_max) * _MaxCoC;
+    half coc = (-coc_min > coc_max ? coc_min: coc_max) * _MaxCoC;
 
     // Premultiply CoC again.
     avg *= smoothstep(0, _MainTex_TexelSize.y * 2, abs(coc));
@@ -175,7 +175,7 @@ half4 FragPrefilter(VaryingsDOF i) : SV_Target
 }
 
 // Bokeh filter with disk-shaped kernels
-half4 FragBlur(VaryingsDOF i) : SV_Target
+half4 FragBlur(VaryingsDOF i): SV_Target
 {
     half4 samp0 = DOF_TEX2D(_MainTex, i.uv);
 
@@ -228,7 +228,7 @@ half4 FragBlur(VaryingsDOF i) : SV_Target
 }
 
 // Postfilter blur
-half4 FragPostBlur(VaryingsDOF i) : SV_Target
+half4 FragPostBlur(VaryingsDOF i): SV_Target
 {
     // 9 tap tent filter with 4 bilinear samples
     const float4 duv = _MainTex_TexelSize.xyxy * float4(0.5, 0.5, -0.5, 0);

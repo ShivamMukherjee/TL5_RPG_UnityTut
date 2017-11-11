@@ -57,7 +57,7 @@
 //#define CUSTOM_WHITE_POINT
 
 /*
-    Basic usage :
+    Basic usage:
 
     half4 color = tex2D(_MainTex, i.uv);
     half3 aces = unity_to_ACES(color.rgb);
@@ -238,7 +238,7 @@ half3 ACES_to_ACEScc(half3 x)
     x = clamp(x, 0.0, HALF_MAX);
 
     // x is clamped to [0, HALF_MAX], skip the <= 0 check
-    return (x < 0.00003051757) ? (log2(0.00001525878 + x * 0.5) + 9.72) / 17.52 : (log2(x) + 9.72) / 17.52;
+    return (x < 0.00003051757) ? (log2(0.00001525878 + x * 0.5) + 9.72) / 17.52: (log2(x) + 9.72) / 17.52;
 
     /*
     return half3(
@@ -696,7 +696,7 @@ half roll_white_fwd(
 
 half3 linear_to_sRGB(half3 x)
 {
-    return (x <= 0.0031308 ? (x * 12.9232102) : 1.055 * pow(x, 1.0 / 2.4) - 0.055);
+    return (x <= 0.0031308 ? (x * 12.9232102): 1.055 * pow(x, 1.0 / 2.4) - 0.055);
 }
 
 half3 linear_to_bt1886(half3 x, half gamma, half Lw, half Lb)
@@ -705,7 +705,7 @@ half3 linear_to_bt1886(half3 x, half gamma, half Lw, half Lb)
     // TODO: Experiment
     return pow(max(x, 0.0), 1.0 / 2.4);
 
-    // Correct implementation (Reference EOTF specified in Rec. ITU-R BT.1886) :
+    // Correct implementation (Reference EOTF specified in Rec. ITU-R BT.1886):
     // L = a(max[(V+b),0])^g
     half invgamma = 1.0 / gamma;
     half p_Lw = pow(Lw, invgamma);
@@ -734,7 +734,7 @@ static const half ODT_SAT_FACTOR = 0.93;
 //
 
 //
-// Summary :
+// Summary:
 //  This transform is intended for mapping OCES onto a desktop computer monitor
 //  typical of those used in motion picture visual effects production. These
 //  monitors may occasionally be referred to as "sRGB" displays, however, the
@@ -747,7 +747,7 @@ static const half ODT_SAT_FACTOR = 0.93;
 //  The monitor specified is intended to be more typical of those found in
 //  visual effects production.
 //
-// Device Primaries :
+// Device Primaries:
 //  Primaries are those specified in Rec. ITU-R BT.709
 //  CIE 1931 chromaticities:  x         y         Y
 //              Red:          0.64      0.33
@@ -755,7 +755,7 @@ static const half ODT_SAT_FACTOR = 0.93;
 //              Blue:         0.15      0.06
 //              White:        0.3127    0.329     100 cd/m^2
 //
-// Display EOTF :
+// Display EOTF:
 //  The reference electro-optical transfer function specified in
 //  IEC 61966-2-1:1999.
 //
@@ -832,7 +832,7 @@ half3 ODT_RGBmonitor_100nits_dim(half3 oces)
 //
 
 //
-// Summary :
+// Summary:
 //  This transform is intended for mapping OCES onto a desktop computer monitor
 //  typical of those used in motion picture visual effects production. These
 //  monitors may occasionally be referred to as "sRGB" displays, however, the
@@ -845,7 +845,7 @@ half3 ODT_RGBmonitor_100nits_dim(half3 oces)
 //  The monitor specified is intended to be more typical of those found in
 //  visual effects production.
 //
-// Device Primaries :
+// Device Primaries:
 //  Primaries are those specified in Rec. ITU-R BT.709
 //  CIE 1931 chromaticities:  x         y         Y
 //              Red:          0.64      0.33
@@ -853,7 +853,7 @@ half3 ODT_RGBmonitor_100nits_dim(half3 oces)
 //              Blue:         0.15      0.06
 //              White:        0.3127    0.329     100 cd/m^2
 //
-// Display EOTF :
+// Display EOTF:
 //  The reference electro-optical transfer function specified in
 //  IEC 61966-2-1:1999.
 //
@@ -945,14 +945,14 @@ half3 ODT_RGBmonitor_D60sim_100nits_dim(half3 oces)
 //
 
 //
-// Summary :
+// Summary:
 //  This transform is intended for mapping OCES onto a Rec.709 broadcast monitor
 //  that is calibrated to a D65 white point at 100 cd/m^2. The assumed observer
 //  adapted white is D65, and the viewing environment is a dim surround.
 //
 //  A possible use case for this transform would be HDTV/video mastering.
 //
-// Device Primaries :
+// Device Primaries:
 //  Primaries are those specified in Rec. ITU-R BT.709
 //  CIE 1931 chromaticities:  x         y         Y
 //              Red:          0.64      0.33
@@ -960,7 +960,7 @@ half3 ODT_RGBmonitor_D60sim_100nits_dim(half3 oces)
 //              Blue:         0.15      0.06
 //              White:        0.3127    0.329     100 cd/m^2
 //
-// Display EOTF :
+// Display EOTF:
 //  The reference electro-optical transfer function specified in
 //  Rec. ITU-R BT.1886.
 //
@@ -1037,14 +1037,14 @@ half3 ODT_Rec709_100nits_dim(half3 oces)
 //
 
 //
-// Summary :
+// Summary:
 //  This transform is intended for mapping OCES onto a Rec.709 broadcast monitor
 //  that is calibrated to a D65 white point at 100 cd/m^2. The assumed observer
 //  adapted white is D60, and the viewing environment is a dim surround.
 //
 //  A possible use case for this transform would be cinema "soft-proofing".
 //
-// Device Primaries :
+// Device Primaries:
 //  Primaries are those specified in Rec. ITU-R BT.709
 //  CIE 1931 chromaticities:  x         y         Y
 //              Red:          0.64      0.33
@@ -1052,7 +1052,7 @@ half3 ODT_Rec709_100nits_dim(half3 oces)
 //              Blue:         0.15      0.06
 //              White:        0.3127    0.329     100 cd/m^2
 //
-// Display EOTF :
+// Display EOTF:
 //  The reference electro-optical transfer function specified in
 //  Rec. ITU-R BT.1886.
 //
@@ -1145,7 +1145,7 @@ half3 ODT_Rec709_D60sim_100nits_dim(half3 oces)
 //
 
 //
-// Summary :
+// Summary:
 //  This transform is intended for mapping OCES onto a Rec.2020 broadcast
 //  monitor that is calibrated to a D65 white point at 100 cd/m^2. The assumed
 //  observer adapted white is D65, and the viewing environment is that of a dim
@@ -1153,7 +1153,7 @@ half3 ODT_Rec709_D60sim_100nits_dim(half3 oces)
 //
 //  A possible use case for this transform would be UHDTV/video mastering.
 //
-// Device Primaries :
+// Device Primaries:
 //  Primaries are those specified in Rec. ITU-R BT.2020
 //  CIE 1931 chromaticities:  x         y         Y
 //              Red:          0.708     0.292
@@ -1161,7 +1161,7 @@ half3 ODT_Rec709_D60sim_100nits_dim(half3 oces)
 //              Blue:         0.131     0.046
 //              White:        0.3127    0.329     100 cd/m^2
 //
-// Display EOTF :
+// Display EOTF:
 //  The reference electro-optical transfer function specified in
 //  Rec. ITU-R BT.1886.
 //
@@ -1239,20 +1239,20 @@ half3 ODT_Rec2020_100nits_dim(half3 oces)
 //
 
 //
-// Summary :
+// Summary:
 //  This transform is intended for mapping OCES onto a P3 digital cinema
 //  projector that is calibrated to a DCI white point at 48 cd/m^2. The assumed
 //  observer adapted white is D60, and the viewing environment is that of a dark
 //  theater.
 //
-// Device Primaries :
+// Device Primaries:
 //  CIE 1931 chromaticities:  x         y         Y
 //              Red:          0.68      0.32
 //              Green:        0.265     0.69
 //              Blue:         0.15      0.06
 //              White:        0.314     0.351     48 cd/m^2
 //
-// Display EOTF :
+// Display EOTF:
 //  Gamma: 2.6
 //
 // Assumed observer adapted white point:

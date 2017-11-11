@@ -25,7 +25,7 @@ public class ShitStick : MonoBehaviour, IWeapon
 	{
 		if (collider.tag.Equals("Enemy"))
 		{
-			collider.GetComponent<IEnemy>().TakeDamage(Stats[0].CalculateStat());
+			collider.GetComponent<IEnemy>().TakeDamage(Stats[0].FinalValue());
 			Debug.Log("Schtuck a(n) " + collider.name);
 		}
 	}

@@ -101,13 +101,13 @@ Shader "Hidden/Post FX/Eye Adaptation"
         float InterpolateExposure(float newExposure, float oldExposure)
         {
             float delta = newExposure - oldExposure;
-            float speed = delta > 0.0 ? _Speed.x : _Speed.y;
+            float speed = delta > 0.0 ? _Speed.x: _Speed.y;
             float exposure = oldExposure + delta * (1.0 - exp2(-unity_DeltaTime.x * speed));
             //float exposure = oldExposure + delta * (unity_DeltaTime.x * speed);
             return exposure;
         }
 
-        float4 FragAdaptProgressive(VaryingsDefault i) : SV_Target
+        float4 FragAdaptProgressive(VaryingsDefault i): SV_Target
         {
             float maxValue = 1.0 / FindMaxHistogramValue();
             float avgLuminance = GetAverageLuminance(maxValue);
@@ -117,7 +117,7 @@ Shader "Hidden/Post FX/Eye Adaptation"
             return exposure.xxxx;
         }
 
-        float4 FragAdaptFixed(VaryingsDefault i) : SV_Target
+        float4 FragAdaptFixed(VaryingsDefault i): SV_Target
         {
             float maxValue = 1.0 / FindMaxHistogramValue();
             float avgLuminance = GetAverageLuminance(maxValue);
@@ -130,10 +130,10 @@ Shader "Hidden/Post FX/Eye Adaptation"
 
         struct VaryingsEditorHisto
         {
-            float4 pos : SV_POSITION;
-            float2 uv : TEXCOORD0;
-            float maxValue : TEXCOORD1;
-            float avgLuminance : TEXCOORD2;
+            float4 pos: SV_POSITION;
+            float2 uv: TEXCOORD0;
+            float maxValue: TEXCOORD1;
+            float avgLuminance: TEXCOORD2;
         };
 
         VaryingsEditorHisto VertEditorHisto(AttributesDefault v)
@@ -146,7 +146,7 @@ Shader "Hidden/Post FX/Eye Adaptation"
             return o;
         }
 
-        float4 FragEditorHisto(VaryingsEditorHisto i) : SV_Target
+        float4 FragEditorHisto(VaryingsEditorHisto i): SV_Target
         {
             const float3 kRangeColor = float3(0.05, 0.4, 0.6);
             const float3 kAvgColor = float3(0.8, 0.3, 0.05);

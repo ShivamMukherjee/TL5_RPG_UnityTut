@@ -52,9 +52,9 @@ Shader "Hidden/Post FX/Bloom"
 
         struct VaryingsMultitex
         {
-            float4 pos : SV_POSITION;
-            float2 uvMain : TEXCOORD0;
-            float2 uvBase : TEXCOORD1;
+            float4 pos: SV_POSITION;
+            float2 uvMain: TEXCOORD0;
+            float2 uvBase: TEXCOORD1;
         };
 
         VaryingsMultitex VertMultitex(AttributesDefault v)
@@ -83,7 +83,7 @@ Shader "Hidden/Post FX/Bloom"
             return tex2D(tex, uv) * autoExposure;
         }
 
-        half4 FragPrefilter(VaryingsDefault i) : SV_Target
+        half4 FragPrefilter(VaryingsDefault i): SV_Target
         {
             float2 uv = i.uv + _MainTex_TexelSize.xy * _PrefilterOffs;
 
@@ -117,7 +117,7 @@ Shader "Hidden/Post FX/Bloom"
             return EncodeHDR(m);
         }
 
-        half4 FragDownsample1(VaryingsDefault i) : SV_Target
+        half4 FragDownsample1(VaryingsDefault i): SV_Target
         {
         #if ANTI_FLICKER
             return EncodeHDR(DownsampleAntiFlickerFilter(_MainTex, i.uvSPR, _MainTex_TexelSize.xy));
@@ -126,12 +126,12 @@ Shader "Hidden/Post FX/Bloom"
         #endif
         }
 
-        half4 FragDownsample2(VaryingsDefault i) : SV_Target
+        half4 FragDownsample2(VaryingsDefault i): SV_Target
         {
             return EncodeHDR(DownsampleFilter(_MainTex, i.uvSPR, _MainTex_TexelSize.xy));
         }
 
-        half4 FragUpsample(VaryingsMultitex i) : SV_Target
+        half4 FragUpsample(VaryingsMultitex i): SV_Target
         {
             half3 base = DecodeHDR(tex2D(_BaseTex, i.uvBase));
             half3 blur = UpsampleFilter(_MainTex, i.uvMain, _MainTex_TexelSize.xy, _SampleScale);

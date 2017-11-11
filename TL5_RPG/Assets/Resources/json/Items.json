@@ -1,0 +1,44 @@
+﻿[{
+	"info": "ShitStick",
+	"name": "Shit Stick",
+	"type": "Weapon",
+	"moreInfo": "A stupid stick, worth its weight in shit.",
+	"action": "Equip",
+	"isModifier": false,
+	"stats": [{
+			"name": "Power",
+			"baseValue": 2,
+			"description": "Item power enhancement."
+		},
+		{
+			"name": "Speed",
+			"baseValue": 4,
+			"description": "Item speed enhancement."
+		}
+	]
+}, {
+	"info": "SpitwadLauncher",
+	"name": "Spitwad Launcher",
+	"type": "Weapon",
+	"moreInfo": "If you could make one of these at school you probably wouldn't be here.",
+	"action": "Equip",
+	"isModifier": false,
+	"stats": [{
+			"name": "Power",
+			"baseValue": 1,
+			"description": "Item power enhancement."
+		},
+		{
+			"name": "Speed",
+			"baseValue": 5,
+			"description": "Item speed enhancement."
+		}
+	]
+}, {
+	"info": "PotionDebug",
+	"name": "Debug Potion",
+	"type": "Consumable",
+	"moreInfo": "Logs out debug info. Not pretty useful.",
+	"action": "Drink",
+	"isModifier": false
+}]

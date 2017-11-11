@@ -28,7 +28,7 @@ Shader "Hidden/Post FX/Monitors/Waveform Render"
                 return x * x;
             }
 
-            float4 FragWaveform(v2f_img i) : SV_Target
+            float4 FragWaveform(v2f_img i): SV_Target
             {
                 const float3 red = float3(1.4, 0.03, 0.02);
                 const float3 green = float3(0.02, 1.1, 0.05);

@@ -88,9 +88,9 @@ Shader "Hidden/Post FX/Screen Space Reflection"
 
         struct v2f
         {
-            float4 pos : SV_POSITION;
-            float2 uv : TEXCOORD0;
-            float2 uv2 : TEXCOORD1;
+            float4 pos: SV_POSITION;
+            float2 uv: TEXCOORD0;
+            float2 uv2: TEXCOORD1;
         };
 
         v2f vert( appdata_img v )
@@ -241,7 +241,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             return float4(tsPResult, rayDist, confidence);
         }
 
-        float4 fragComposite(v2f i) : SV_Target
+        float4 fragComposite(v2f i): SV_Target
         {
             // Pixel being shaded
             float2 tsP = i.uv2.xy;
@@ -354,7 +354,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
         }
 
         float4 _Axis;
-        float4 fragGBlur(v2f i) : SV_Target
+        float4 fragGBlur(v2f i): SV_Target
         {
             int radius = 4;
 
@@ -657,7 +657,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             return fmod(floor(t * float3(8.0, 4.0, 2.0)), 2.0);
         }
 
-        float4 fragCompositeSSR(v2f i) : SV_Target
+        float4 fragCompositeSSR(v2f i): SV_Target
         {
             // Pixel being shaded
             float2 tsP = i.uv2.xy;
@@ -727,7 +727,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
 
         int _LastMip;
 
-        float4 fragMin(v2f i) : SV_Target
+        float4 fragMin(v2f i): SV_Target
         {
             float2 tsP = i.uv2.xy;
             float2 lastTexSize = mipToSize(_LastMip);
@@ -741,13 +741,13 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             );
         }
 
-        float4 fragResolveHitPoints(v2f i) : SV_Target
+        float4 fragResolveHitPoints(v2f i): SV_Target
         {
             float2 tsP = i.uv2.xy;
             float4 temp = tex2D(_HitPointTexture, tsP);
             float2 hitPoint = temp.xy;
             float confidence = temp.w;
-            float3 colorResult = confidence > 0.0 ? tex2D(_MainTex, hitPoint).rgb : tex2D(_CameraReflectionsTexture, tsP).rgb;
+            float3 colorResult = confidence > 0.0 ? tex2D(_MainTex, hitPoint).rgb: tex2D(_CameraReflectionsTexture, tsP).rgb;
 
             if (any(isnan(colorResult)))
                 colorResult = float3(0.0, 0.0, 0.0);
@@ -761,7 +761,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             return float4(colorResult, confidence);
         }
 
-        float4 fragBilatKeyPack(v2f i) : SV_Target
+        float4 fragBilatKeyPack(v2f i): SV_Target
         {
             float2 tsP = i.uv2.xy;
             float3 csN = tex2D(_CameraGBufferTexture2, tsP).xyz;
@@ -769,7 +769,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             return float4(csN, roughness);
         }
 
-        float4 fragDepthToCSZ(v2f i) : SV_Target
+        float4 fragDepthToCSZ(v2f i): SV_Target
         {
             float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv2.xy);
             return float4(-LinearEyeDepth(depth), 0.0, 0.0, 0.0);
@@ -793,7 +793,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
             float2(-0.791559,-0.59771)
         };
 
-        float4 fragFilterSharpReflections(v2f i) : SV_Target
+        float4 fragFilterSharpReflections(v2f i): SV_Target
         {
             // Could improve perf by not computing blur when we won't be sampling the highest level anyways
             float2 tsP = i.uv2.xy;
@@ -837,7 +837,7 @@ Shader "Hidden/Post FX/Screen Space Reflection"
                 #pragma vertex vert
                 #pragma fragment fragRaytrace1
 
-                float4 fragRaytrace1(v2f i) : SV_Target
+                float4 fragRaytrace1(v2f i): SV_Target
                 {
                     return fragRaytrace(i, _RayStepSize);
                 }

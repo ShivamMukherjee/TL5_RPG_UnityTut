@@ -19,7 +19,7 @@ Shader "Hidden/Post FX/Monitors/Histogram Render"
             float4 _ColorB;
             float4 _ColorL;
 
-            float4 FragSingleChannel(v2f_img i) : SV_Target
+            float4 FragSingleChannel(v2f_img i): SV_Target
             {
                 const float4 COLORS[4] = { _ColorR, _ColorG, _ColorB, _ColorL };
 
@@ -37,7 +37,7 @@ Shader "Hidden/Post FX/Monitors/Histogram Render"
                 return color;
             }
 
-            float4 FragRgbMerged(v2f_img i) : SV_Target
+            float4 FragRgbMerged(v2f_img i): SV_Target
             {
                 const float4 COLORS[3] = { _ColorR, _ColorG, _ColorB };
 
@@ -62,7 +62,7 @@ Shader "Hidden/Post FX/Monitors/Histogram Render"
                 return saturate(targetColor);
             }
 
-            float4 FragRgbSplitted(v2f_img i) : SV_Target
+            float4 FragRgbSplitted(v2f_img i): SV_Target
             {
                 const float4 COLORS[3] = {_ColorR, _ColorG, _ColorB};
 

@@ -226,6 +226,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a91991baa4fc340a62b8729f9a7f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAgent: {fileID: 0}
   dialogue: []
   alias: 

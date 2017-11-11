@@ -56,14 +56,14 @@ void rayIterations(in bool traceBehindObjects, inout float2 P, inout float stepD
 
         // Undo the homogeneous operation to obtain the camera-space
         // Q at each point
-        hitPixel = permute ? P.yx : P;
+        hitPixel = permute ? P.yx: P;
 
         sceneZ = tex2Dlod(_CameraDepthTexture, float4(hitPixel * invSize,0,0)).r;
         sceneZ = -LinearEyeDepth(sceneZ);
 
         bool isBehind = (rayZMin <= sceneZ);
         intersecting = isBehind && (rayZMax >= sceneZ - layerThickness);
-        stop = traceBehindObjects ? intersecting : isBehind;
+        stop = traceBehindObjects ? intersecting: isBehind;
 
     } // pixel on ray
 
@@ -98,7 +98,7 @@ bool castDenseScreenSpaceRay
     float nearPlaneZ = -0.01;
     // Clip ray to a near plane in 3D (doesn't have to be *the* near plane, although that would be a good idea)
     float rayLength = ((csOrigin.z + csDirection.z * maxRayTraceDistance) > nearPlaneZ) ?
-                        ((nearPlaneZ - csOrigin.z) / csDirection.z) :
+                        ((nearPlaneZ - csOrigin.z) / csDirection.z):
                         maxRayTraceDistance;
 
     float3 csEndPoint = csDirection * rayLength + csOrigin;
@@ -138,14 +138,14 @@ bool castDenseScreenSpaceRay
     float alpha = 0.0;
     // P0 must be in bounds
     if (P1.y > yMax || P1.y < yMin) {
-        float yClip = (P1.y > yMax) ? yMax : yMin;
+        float yClip = (P1.y > yMax) ? yMax: yMin;
         float yAlpha = (P1.y - yClip) / (P1.y - P0.y); // Denominator is not zero, since P0 != P1 (or P0 would have been clipped!)
         alpha = yAlpha;
     }
 
     // P0 must be in bounds
     if (P1.x > xMax || P1.x < xMin) {
-        float xClip = (P1.x > xMax) ? xMax : xMin;
+        float xClip = (P1.x > xMax) ? xMax: xMin;
         float xAlpha = (P1.x - xClip) / (P1.x - P0.x); // Denominator is not zero, since P0 != P1 (or P0 would have been clipped!)
         alpha = max(alpha, xAlpha);
     }
@@ -157,7 +157,7 @@ bool castDenseScreenSpaceRay
 #endif
 
     // We're doing this to avoid divide by zero (rays exactly parallel to an eye ray)
-    P1 = (distanceSquared(P0, P1) < 0.0001) ? P0 + float2(0.01, 0.01) : P1;
+    P1 = (distanceSquared(P0, P1) < 0.0001) ? P0 + float2(0.01, 0.01): P1;
 
     float2 delta = P1 - P0;
 

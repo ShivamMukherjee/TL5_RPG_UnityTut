@@ -15,7 +15,7 @@ groupshared uint4 gs_histogram[256];
 
 #pragma kernel KHistogramGather
 [numthreads(GROUP_SIZE, GROUP_SIZE,1)]
-void KHistogramGather(uint2 dispatchThreadId : SV_DispatchThreadID, uint2 groupThreadId : SV_GroupThreadID)
+void KHistogramGather(uint2 dispatchThreadId: SV_DispatchThreadID, uint2 groupThreadId: SV_GroupThreadID)
 {
     const uint localThreadId = groupThreadId.y * GROUP_SIZE + groupThreadId.x;
     
@@ -60,7 +60,7 @@ groupshared uint4 gs_pyramid[256];
 
 #pragma kernel KHistogramScale
 [numthreads(16,16,1)]
-void KHistogramScale(uint2 groupThreadId : SV_GroupThreadID)
+void KHistogramScale(uint2 groupThreadId: SV_GroupThreadID)
 {
     const uint localThreadId = groupThreadId.y * 16 + groupThreadId.x;
     gs_pyramid[localThreadId] = _Histogram[localThreadId];
@@ -84,7 +84,7 @@ void KHistogramScale(uint2 groupThreadId : SV_GroupThreadID)
 
 #pragma kernel KHistogramClear
 [numthreads(GROUP_SIZE, GROUP_SIZE, 1)]
-void KHistogramClear(uint2 dispatchThreadId : SV_DispatchThreadID)
+void KHistogramClear(uint2 dispatchThreadId: SV_DispatchThreadID)
 {
     if (dispatchThreadId.x < (uint)_Res.x && dispatchThreadId.y < (uint)_Res.y)
         _Histogram[dispatchThreadId.y * _Res.x + dispatchThreadId.x] = uint4(0u, 0u, 0u, 0u);

@@ -16,7 +16,7 @@ public class CharacterStats : MonoBehaviour
 	{
 		foreach (var stat in stats)
 		{
-			Stats.Find(x => x.Name == stat.Name).AddBonus(new StatBonus(stat.BaseValue));
+			Stats.Find(x => x.name == stat.name).AddBonus(new StatBonus(stat.baseValue));
 		}
 	}
 
@@ -24,7 +24,7 @@ public class CharacterStats : MonoBehaviour
 	{
 		foreach (var stat in stats)
 		{
-			Stats.Find(x => x.Name == stat.Name).RemoveBonus(new StatBonus(stat.BaseValue));
+			Stats.Find(x => x.name == stat.name).RemoveBonus(new StatBonus(stat.baseValue));
 		}
 	}
 }

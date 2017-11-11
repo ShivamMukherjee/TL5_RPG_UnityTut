@@ -15,8 +15,8 @@ Shader "Hidden/Post FX/Fog"
 
         struct Varyings
         {
-            float2 uv : TEXCOORD0;
-            float4 vertex : SV_POSITION;
+            float2 uv: TEXCOORD0;
+            float4 vertex: SV_POSITION;
         };
 
         Varyings VertFog(AttributesDefault v)
@@ -55,7 +55,7 @@ Shader "Hidden/Post FX/Fog"
             return dist;
         }
 
-        half4 FragFog(Varyings i) : SV_Target
+        half4 FragFog(Varyings i): SV_Target
         {
             half4 color = tex2D(_MainTex, i.uv);
 
@@ -67,7 +67,7 @@ Shader "Hidden/Post FX/Fog"
             return lerp(color, _FogColor, fog);
         }
 
-        half4 FragFogExcludeSkybox(Varyings i) : SV_Target
+        half4 FragFogExcludeSkybox(Varyings i): SV_Target
         {
             half4 color = tex2D(_MainTex, i.uv);
 

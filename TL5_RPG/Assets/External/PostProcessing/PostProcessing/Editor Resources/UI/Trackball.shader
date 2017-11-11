@@ -54,7 +54,7 @@ Shader "Hidden/Post FX/UI/Trackball"
                 float alphaIn = smoothstep(kHueInnerRadius - delta, kHueInnerRadius + delta, dist);
 
                 float hue = angle;
-                hue = 1.0 - ((hue > 0.0) ? hue : PI2 + hue) / PI2;
+                hue = 1.0 - ((hue > 0.0) ? hue: PI2 + hue) / PI2;
                 float4 c = float4(HsvToRgb(float3(hue, 1.0, 1.0)), 1.0);
                 color += lerp((0.0).xxxx, c, alphaIn - alphaOut);
             }
@@ -77,12 +77,12 @@ Shader "Hidden/Post FX/UI/Trackball"
             return color * _DisabledState;
         }
 
-        float4 FragTrackballDark(v2f_img i) : SV_Target
+        float4 FragTrackballDark(v2f_img i): SV_Target
         {
             return CreateWheel(i, 1.0, 0.15);
         }
 
-        float4 FragTrackballLight(v2f_img i) : SV_Target
+        float4 FragTrackballLight(v2f_img i): SV_Target
         {
             return CreateWheel(i, 0.0, 0.3);
         }

@@ -27,7 +27,7 @@ Shader "Hidden/Post FX/Monitors/Parade Render"
                 return x * x;
             }
 
-            float4 FragParade(v2f_img i) : SV_Target
+            float4 FragParade(v2f_img i): SV_Target
             {
                 const float3 red = float3(1.8, 0.03, 0.02);
                 const float3 green = float3(0.02, 1.3, 0.05);

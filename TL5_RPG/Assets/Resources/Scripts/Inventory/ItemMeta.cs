@@ -1,27 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
 
 public class ItemMeta
 {
-	public List<BaseStat> Stats { get; }
-	public string Info { get; }
-	public string MoreInfo { get; }
-	public string Name { get; }
-	public string ActionName { get; }
-	public bool IsModifier { get; }
-
-	public ItemMeta(List<BaseStat> stats, string info)
+	public enum ItemType
 	{
-		Stats = stats;
-		Info = info;
+		Weapon, Consumable, Quest
 	}
 
-	public ItemMeta(List<BaseStat> stats, string info, string moreInfo, string actionName, string name, bool isModifier)
+	public string info;
+	public string name;
+	[JsonConverter(typeof(StringEnumConverter))] public ItemType type;
+	public string moreInfo;
+	public string action;
+	public List<BaseStat> stats;
+	public bool isModifier;
+
+	public ItemMeta(ItemMeta item)
+		: this(item.stats, item.info, item.name, item.type, item.moreInfo, item.action, item.isModifier) { }
+
+	[JsonConstructor]
+	public ItemMeta(List<BaseStat> stats, string info, string name, ItemType type, string moreInfo, string action, bool isModifier)
 	{
-		Stats = stats;
-		Info = info;
-		MoreInfo = moreInfo;
-		ActionName = actionName;
-		Name = name;
-		IsModifier = isModifier;
+		this.stats = stats;
+		this.info = info;
+		this.name = name;
+		this.type = type;
+		this.moreInfo = moreInfo;
+		this.action = action;
+		this.isModifier = isModifier;
 	}
 }

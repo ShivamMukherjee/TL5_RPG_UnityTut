@@ -24,14 +24,14 @@
 
 struct VaryingsSolver
 {
-    float4 vertex : SV_POSITION;
-    float4 uv : TEXCOORD0; // [xy: _MainTex.uv, zw: _HistoryTex.uv]
+    float4 vertex: SV_POSITION;
+    float4 uv: TEXCOORD0; // [xy: _MainTex.uv, zw: _HistoryTex.uv]
 };
 
 struct OutputSolver
 {
-    float4 destination : SV_Target0;
-    float4 history : SV_Target1;
+    float4 destination: SV_Target0;
+    float4 history: SV_Target1;
 };
 
 sampler2D _HistoryTex;
@@ -130,7 +130,7 @@ OutputSolver FragSolver(VaryingsSolver input)
     float2 uv = input.uv.xy;
 
 #if UNITY_UV_STARTS_AT_TOP
-    uv -= _MainTex_TexelSize.y < 0 ? _Jitter * float2(1.0, -1.0) : _Jitter;
+    uv -= _MainTex_TexelSize.y < 0 ? _Jitter * float2(1.0, -1.0): _Jitter;
 #else
     uv -= _Jitter;
 #endif
@@ -198,7 +198,7 @@ OutputSolver FragSolver(VaryingsSolver input)
 // -----------------------------------------------------------------------------
 // Alpha clearance
 
-float4 FragAlphaClear(VaryingsDefault input) : SV_Target
+float4 FragAlphaClear(VaryingsDefault input): SV_Target
 {
     return float4(tex2D(_MainTex, input.uv).rgb, 0.0);
 }

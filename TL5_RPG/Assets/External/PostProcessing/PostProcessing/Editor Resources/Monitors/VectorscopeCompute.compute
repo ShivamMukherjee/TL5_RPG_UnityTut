@@ -20,7 +20,7 @@ float3 RgbToYUV(float3 c)
 
 #pragma kernel KVectorscope
 [numthreads(GROUP_SIZE,GROUP_SIZE,1)]
-void KVectorscope(uint2 dispatchThreadId : SV_DispatchThreadID)
+void KVectorscope(uint2 dispatchThreadId: SV_DispatchThreadID)
 {
     if (dispatchThreadId.x < (uint)_Res.x && dispatchThreadId.y < (uint)_Res.y)
     {
@@ -42,7 +42,7 @@ void KVectorscope(uint2 dispatchThreadId : SV_DispatchThreadID)
 
 #pragma kernel KVectorscopeClear
 [numthreads(GROUP_SIZE,GROUP_SIZE,1)]
-void KVectorscopeClear(uint2 dispatchThreadId : SV_DispatchThreadID)
+void KVectorscopeClear(uint2 dispatchThreadId: SV_DispatchThreadID)
 {
     if (dispatchThreadId.x < (uint)_Res.x && dispatchThreadId.y < (uint)_Res.y)
         _Vectorscope[dispatchThreadId.y * _Res.x + dispatchThreadId.x] = 0u;
