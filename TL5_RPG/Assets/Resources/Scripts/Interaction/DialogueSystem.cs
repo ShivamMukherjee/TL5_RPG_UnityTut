@@ -16,14 +16,7 @@ public class DialogueSystem : MonoBehaviour
 
 	void Awake()
 	{
-		continueButton = panel.transform.Find("Continue").GetComponent<Button>();
-		continueButton.onClick.AddListener(ContinueDialogue);
-
-		text = panel.transform.Find("Text").GetComponent<Text>();
-		nameText = panel.transform.Find("Name").GetComponentInChildren<Text>();
-		panel.SetActive(false);
-
-		if (Instance && Instance != this)
+		if (Instance != null && Instance != this)
 		{
 			Destroy(gameObject);
 		}
@@ -31,6 +24,13 @@ public class DialogueSystem : MonoBehaviour
 		{
 			Instance = this;
 		}
+
+		continueButton = panel.transform.Find("Continue").GetComponent<Button>();
+		continueButton.onClick.AddListener(ContinueDialogue);
+
+		text = panel.transform.Find("Text").GetComponent<Text>();
+		nameText = panel.transform.Find("Name").GetComponentInChildren<Text>();
+		panel.SetActive(false);
 	}
 
 	public void AddNewDialogue(string[] lines, string npcName)

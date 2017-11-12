@@ -30,12 +30,12 @@ public class InventoryUIInfo : MonoBehaviour
 	{
 		switch (item.type)
 		{
-			case ItemMeta.ItemType.Consumable:
+			case ItemMeta.Type.Consumable:
 				InventoryManager.Instance.PerformConsumeAction(item);
 				Destroy(selectedElement.gameObject);
 				break;
 
-			case ItemMeta.ItemType.Weapon:
+			case ItemMeta.Type.Weapon:
 				InventoryManager.Instance.PerformEquipActon(item);
 				Destroy(selectedElement.gameObject);
 				break;

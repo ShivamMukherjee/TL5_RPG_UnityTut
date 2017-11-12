@@ -6,10 +6,10 @@ public class ItemDatabase : MonoBehaviour
 {
 	public static ItemDatabase Instance { get; private set; }
 	private List<ItemMeta> items;
-	
+
 	void Awake()
 	{
-		if (Instance && Instance != this)
+		if (Instance != null && Instance != this)
 		{
 			Destroy(gameObject);
 		}
@@ -35,7 +35,7 @@ public class ItemDatabase : MonoBehaviour
 			}
 		}
 
-		Debug.LogWarning("Couldn't find item with info \"" + info + '"');
+		Debug.LogWarning($"Couldn't find item with info \"{info}\"");
 		return null;
 	}
 }

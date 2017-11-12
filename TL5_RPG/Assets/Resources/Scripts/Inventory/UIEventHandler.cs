@@ -3,10 +3,11 @@
 public class UIEventHandler : MonoBehaviour
 {
 	public delegate void ItemEventHandler(ItemMeta item);
-	public static event ItemEventHandler OnItemAddedToInventory;
+	public static event ItemEventHandler OnAddItem;
 
-	public static void ItemAddedToInventory(ItemMeta item)
+	public static void AddItem(ItemMeta item)
 	{
-		OnItemAddedToInventory(item);
+		OnAddItem(item);
+		Debug.Log("Item added?!");
 	}
 }

@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		if (Instance && Instance != this)
+		if (Instance != null && Instance != this)
 		{
 			Destroy(gameObject);
 		}
@@ -25,16 +25,16 @@ public class InventoryManager : MonoBehaviour
 		Items = new List<ItemMeta>();
 		weaponController = GetComponent<WeaponController>();
 		consumableController = GetComponent<ConsumableController>();
-		PlaceItem("SpitwadLauncher");
-		PlaceItem("PotionDebug");
 		PlaceItem("ShitStick");
+		PlaceItem("PotionDebug");
+		PlaceItem("SpitwadLauncher");
 	}
 
 	public void PlaceItem(string info)
 	{
-		ItemMeta item = new ItemMeta(ItemDatabase.Instance.GetItem(info));
-		Items.Add(item);
-		UIEventHandler.ItemAddedToInventory(Items.Last());
+		Debug.Log(ItemDatabase.Instance != null);
+		//Items.Add(ItemDatabase.Instance.GetItem(info));
+		//UIEventHandler.AddItem(Items.Last());
 	}
 
 	public void SetupItemDetails(ItemMeta item, UnityEngine.UI.Button selectedElement)

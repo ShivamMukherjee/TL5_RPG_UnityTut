@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 public class ItemMeta
 {
-	public enum ItemType
+	public enum Type
 	{
 		Weapon, Consumable, Quest
 	}
 
 	public string info;
 	public string name;
-	[JsonConverter(typeof(StringEnumConverter))] public ItemType type;
+	[JsonConverter(typeof(StringEnumConverter))] public Type type;
 	public string moreInfo;
 	public string action;
 	public List<BaseStat> stats;
@@ -21,7 +21,7 @@ public class ItemMeta
 		: this(item.stats, item.info, item.name, item.type, item.moreInfo, item.action, item.isModifier) { }
 
 	[JsonConstructor]
-	public ItemMeta(List<BaseStat> stats, string info, string name, ItemType type, string moreInfo, string action, bool isModifier)
+	public ItemMeta(List<BaseStat> stats, string info, string name, Type type, string moreInfo, string action, bool isModifier)
 	{
 		this.stats = stats;
 		this.info = info;

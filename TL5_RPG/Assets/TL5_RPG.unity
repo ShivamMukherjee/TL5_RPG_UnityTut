@@ -1424,7 +1424,7 @@ GameObject:
   - component: {fileID: 333851317}
   - component: {fileID: 333851316}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Use
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6280,6 +6280,11 @@ Prefab:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114009445861690012, guid: 24a033bbbdaaa9049ac5627dba1152c2,
+        type: 2}
+      propertyPath: consumableController
+      value: 
+      objectReference: {fileID: 104487415}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24a033bbbdaaa9049ac5627dba1152c2, type: 2}
   m_IsPrefabParent: 0

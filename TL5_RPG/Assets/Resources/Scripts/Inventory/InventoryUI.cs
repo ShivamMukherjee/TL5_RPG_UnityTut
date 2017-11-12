@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
 	void Start()
 	{
 		itemContainer = Resources.Load<InventoryUIItem>("UI/ItemContainer");
-		UIEventHandler.OnItemAddedToInventory += ItemAdded;
+		UIEventHandler.OnAddItem += ItemAdded;
 		panel.gameObject.SetActive(false);
 	}
 
