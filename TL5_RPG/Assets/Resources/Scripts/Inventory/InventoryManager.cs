@@ -32,9 +32,9 @@ public class InventoryManager : MonoBehaviour
 
 	public void PlaceItem(string info)
 	{
-		Debug.Log(ItemDatabase.Instance != null);
-		//Items.Add(ItemDatabase.Instance.GetItem(info));
-		//UIEventHandler.AddItem(Items.Last());
+		Debug.Log($"ItemDatabase.Instance exists? {ItemDatabase.Instance != null}");
+		Items.Add(ItemDatabase.Instance.GetItem(info));
+		UIEventHandler.AddItem(Items.Last());
 	}
 
 	public void SetupItemDetails(ItemMeta item, UnityEngine.UI.Button selectedElement)

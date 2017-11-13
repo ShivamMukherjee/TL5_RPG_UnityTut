@@ -7,7 +7,7 @@ public class UIEventHandler : MonoBehaviour
 
 	public static void AddItem(ItemMeta item)
 	{
+		Debug.Log($"Event exists? {OnAddItem != null} | Item: {item}");
 		OnAddItem(item);
-		Debug.Log("Item added?!");
 	}
 }
